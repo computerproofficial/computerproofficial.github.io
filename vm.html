@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Windows 7</title>
+<link rel="icon" type="image/x-icon" href="computerpro.ico">
+<style>
+html, body {
+    margin:0; padding:0; width:100%; height:100%; overflow:hidden;
+    font-family:sans-serif;
+    background: url('https://4kwallpapers.com/images/walls/thumbs_3t/13944.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+#taskbar {position:absolute;bottom:0;left:0;width:100%;height:40px;background:rgba(30,30,30,0.9);display:flex;align-items:center;padding:0 10px;box-sizing:border-box;z-index:1000;}
+#start-btn {width: 40px; height: 32px; cursor: pointer; margin-right: 5px;
+    background: url('https://cdn.pixabay.com/photo/2012/05/04/10/56/window-47202_1280.png') no-repeat center center;
+    background-size: contain; border-radius: 4px;}
+#icons {position:absolute;top:20px;left:20px;color:white;}
+.icon {margin-bottom:20px;cursor:pointer;text-align:center;}
+.icon img {width:48px;height:48px;display:block;margin:auto;}
+#tray {margin-left:auto;display:flex;align-items:center;gap:10px;position:relative;}
+.tray-icon {width:24px;height:24px;background:white;border-radius:3px;cursor:pointer;margin-left:5px;}
+#wifi-menu {position:absolute;bottom:50px;right:10px;background:#eee;padding:10px;border-radius:4px;display:none;}
+.window {position:absolute;background:white;border:2px solid #666;display:none;flex-direction:column;min-width:400px;min-height:250px;max-width:100%;max-height:calc(100%-40px);z-index:500;}
+.title-bar {background:#2b2b2b;color:white;padding:5px;display:flex;justify-content:space-between;align-items:center;cursor:move;user-select:none;}
+.title-bar.unfocused {background:#fff;color:black;}
+.title-bar button {margin-left:5px;cursor:pointer;background:#555;border:none;color:white;width:24px;height:24px;border-radius:3px;}
+.taskbar-btn {margin-left:5px;padding:4px 12px;background:#555;color:white;cursor:pointer;border-radius:2px;font-size:14px;}
+#chrome-bar {background:#ddd;padding:5px;display:flex;gap:5px;}
+#chrome-bar button {padding:4px 8px;cursor:pointer;}
+#chrome-url {flex:1;}
+iframe {flex:1;border:none;background:white;}
+.resizer {position:absolute;background:transparent;z-index:1000;}
+.resizer.br,.resizer.bl,.resizer.tr,.resizer.tl{width:15px;height:15px;}
+.resizer.t,.resizer.b{top:-5px;left:50%;margin-left:-7.5px;height:10px;width:15px;cursor:ns-resize;}
+.resizer.l,.resizer.r{top:50%;margin-top:-7.5px;height:15px;width:10px;cursor:ew-resize;}
+.resizer.tl{top:-5px;left:-5px;cursor:nwse-resize;}
+.resizer.tr{top:-5px;right:-5px;cursor:nesw-resize;}
+.resizer.bl{bottom:-5px;left:-5px;cursor:nesw-resize;}
+.resizer.br{bottom:-5px;right:-5px;cursor:nwse-resize;}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=settings_ethernet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=delete" />
+</head>
+<body>
+
+<div id="icons">
+    <div class="icon" id="open-chrome">
+        <img src="https://www.google.com/chrome/static/images/favicons/favicon-96x96.png" />
+        Google Shitmium
+    </div>
+    <div onclick="virus()" class="icon">
+        <img src="https://icons.iconarchive.com/icons/iconshock/vista-general/256/trash-icon.png" />
+        Recycle Bin
+    </div>
+</div>
+
+<div id="taskbar">
+    <div id="start-btn"></div>
+    <div id="taskbar-windows" style="display:flex; gap:5px;"></div>
+    <div id="tray">
+		<p>You've got a new message from Butterdicktoast93.</p>
+        <div class="tray-icon" id="wifi"><img src="https://www.shareicon.net/data/128x128/2015/09/12/99930_ethernet_512x512.png"></div>
+    </div>
+</div>
+
+<div id="wifi-menu">Ethernet</div>
+
+<div id="chrome-window" class="window">
+    <div class="title-bar" id="chrome-title">
+        <span>Google Shitmium</span>
+        <div>
+            <button id="minimize">—</button>
+            <button id="maximize">□</button>
+            <button id="close">✕</button>
+        </div>
+    </div>
+    <div id="chrome-bar">
+        <button id="back">◀</button>
+        <button id="forward">▶</button>
+        <button id="refresh">⟳</button>
+        <input id="chrome-url" placeholder="Search or enter URL" />
+        <button id="go">Go</button>
+    </div>
+    <iframe id="chrome-frame" sandbox="allow-scripts allow-forms allow-same-origin"></iframe>
+
+    <div class="resizer br"></div>
+    <div class="resizer bl"></div>
+    <div class="resizer tr"></div>
+    <div class="resizer tl"></div>
+    <div class="resizer t"></div>
+    <div class="resizer b"></div>
+    <div class="resizer l"></div>
+    <div class="resizer r"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const wifi = document.getElementById('wifi');
+    const wifiMenu = document.getElementById('wifi-menu');
+    wifi.onclick = () => wifiMenu.style.display = wifiMenu.style.display==='block'?'none':'block';
+
+    const chromeWindow = document.getElementById('chrome-window');
+    const openChrome = document.getElementById('open-chrome');
+    const frame = document.getElementById('chrome-frame');
+    const urlBox = document.getElementById('chrome-url');
+    const taskbarWindows = document.getElementById('taskbar-windows');
+    const titleBar = document.getElementById('chrome-title');
+    let windowBtn;
+    let isMaximized = false;
+    let lastPos = {top:60,left:50,width:'80%',height:'70%'};
+
+    function loadURL(input){
+        let url = input.trim();
+
+        // --- BLOCKPAGE for https://computernewb.com/collab-vm/ and any sub-paths ---
+        const blockPattern = /^https:\/\/computernewb\.com\/collab-vm(\/.*|#.*)?$/i;
+        if(blockPattern.test(url)){
+            frame.srcdoc = `
+           <HTML lang=en><HEAD><TITLE>BLOCKED</TITLE>
+			<META charset=UTF-8><LINK href="blockpage/style.css" type=text/css 
+			rel=stylesheet>
+			<META content="MSHTML 6.00.2900.5512" name=GENERATOR></HEAD>
+			<BODY>
+			<DIV class=main><IMG class=bsod src="blockpage/computerpro.png"> 
+			<H1>HALT! This dookie page is blocked!</H1>
+			<P>The page you tried to access has commited so stupid atrocities, even when you can't even access it in the dookie browser, we had to block it.</P>
+			<P><B>Site:</B>&nbsp;CollabVM (computernewb.com)<BR><B>Reason:</B>&nbsp;We have a rivalry with those assholes<BR></P>
+			<DIV class=info>URL:&nbsp;<SPAN>https://computernewb.com/collab-vm/</SPAN><BR>group:&nbsp;<SPAN>group1</SPAN><BR>IP:&nbsp;<SPAN>Your dookie grandma</SPAN><BR></DIV></DIV>
+			</BODY></HTML>
+			`;
+            urlBox.value = url;
+            return;
+        }
+
+        // --- ComputerPro Pages ---
+        if(url.startsWith('computerpro://')){
+            // ComputerVideo Page
+            if(url==='computerpro://computervideo.cat'){
+                const images = [
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY_BxqZIqiMBFlK2BNEPOCMlBV4ws8B41fbQ&s',
+                    'https://i.pinimg.com/736x/2e/14/f4/2e14f42c34b3012d3858121aee55b6c8.jpg',
+                    'images/afiwbj.jpg',
+                    'https://c.tenor.com/FM3PGwDyW0cAAAAd/tenor.gif',
+                    'https://c.tenor.com/jqS9Bb71T6YAAAAd/tenor.gif',
+                    'https://c.tenor.com/CTGsizcN-toAAAAd/tenor.gif',
+                    'https://c.tenor.com/zR8iO_OfH7EAAAAC/tenor.gif',
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcE0m3nWIE40nibpSTAzTQNwti9RzNMfIuxQ&s'
+                ];
+                let currentIndex = 0;
+                frame.srcdoc = `
+                <html>
+                <head>
+                <style>
+                    html, body {margin:0;padding:0;width:100%;height:100%;display:flex;flex-direction:column;font-family:sans-serif;background:#222;color:white;}
+                    h2 {margin:10px;text-align:center;}
+                    #player {flex:1; display:flex; align-items:center; justify-content:center; width:100%;}
+                    img {max-width:100%; max-height:100%; object-fit:contain; border:2px solid #333;}
+                    #controls {margin:10px;text-align:center;}
+                    button{padding:8px 16px;margin:0 10px;cursor:pointer;border-radius:4px;border:none;background:#555;color:white;}
+                </style>
+                </head>
+                <body>
+                    <h2>ComputerVideo</h2>
+                    <div id="player">
+                        <img id="photo" src="${images[currentIndex]}" />
+                    </div>
+                    <div id="controls">
+                        <button id="prev">Previous</button>
+                        <button id="next">Next</button>
+                    </div>
+                    <script>
+                        const images = ${JSON.stringify(images)};
+                        let index = ${currentIndex};
+                        const img = document.getElementById('photo');
+                        document.getElementById('prev').onclick = ()=>{ index = (index-1+images.length)%images.length; img.src = images[index]; };
+                        document.getElementById('next').onclick = ()=>{ index = (index+1)%images.length; img.src = images[index]; };
+                    <\/script>
+                </body>
+                </html>`;
+                urlBox.value = url;
+                return;
+            }
+
+            // ComputerSearch Page
+            if(url.startsWith('computerpro://computersearch.cat')){
+                const searchMatch = url.match(/\/search\?q=(.*)/);
+                if(!searchMatch){
+                    frame.srcdoc = `<html><head><style>body{font-family:sans-serif;text-align:center;margin-top:50px;}#logo{font-size:48px;font-weight:bold;animation:rainbow 3s infinite linear;}@keyframes rainbow{0%{color:red;}16%{color:orange;}33%{color:yellow;}50%{color:green;}66%{color:blue;}83%{color:indigo;}100%{color:violet;}}.shortcut{font-size:20px;margin-top:20px;display:block;cursor:pointer;}</style></head><body><div id='logo'>ComputerSearch</div><form onsubmit="window.parent.postMessage({type:'search',q:this.q.value},'*');return false;"><input name='q' placeholder='Search...' style='font-size:18px;'/><button type='submit'>Search</button></form><a class='shortcut' onclick="window.parent.postMessage({type:'goto',url:'computerpro://computervideo.cat'},'*')">ComputerVideo</a></body></html>`;
+                    urlBox.value = 'computerpro://computersearch.cat';
+                    return;
+                } else {
+                    const query = decodeURIComponent(searchMatch[1].replace(/\+/g,' '));
+                    let resultsHTML = `<h2>ComputerSearch results for: "${query}"</h2>`;
+                    if(query.toLowerCase().includes('computervideo')){
+                        resultsHTML += `<div class='result'><a onclick="window.parent.postMessage({type:'goto', url:'computerpro://computervideo.cat'},'*')">ComputerVideo</a></div>`;
+                    }
+                    if(query.toLowerCase().includes('computersearch')){
+                        resultsHTML += `<div class='result'><a onclick="window.parent.postMessage({type:'goto', url:'computerpro://computersearch.cat'},'*')">ComputerSearch</a></div>`;
+                    }
+                    if(resultsHTML===`<h2>ComputerSearch results for: "${query}"</h2>`){
+                        resultsHTML += `<div class='result'>No results found on ComputerNet for "${query}".</div>`;
+                    }
+                    frame.srcdoc = `<html><head><style>body{font-family:sans-serif;padding:20px;}.result{margin:10px 0;padding:10px;border:1px solid #aaa;border-radius:6px;}a{cursor:pointer;color:blue;}</style></head><body>${resultsHTML}</body></html>`;
+                    urlBox.value = url;
+                    return;
+                }
+            }
+        }
+
+        // --- default not found page ---
+        frame.srcdoc = `<html><head><style>body{font-family:sans-serif;padding:20px;}.result{margin:10px 0;padding:10px;border:1px solid #aaa;border-radius:6px;}</style></head><body><h2>Cannot access "${input}" on ComputerNet.</h2></body></html>`;
+        urlBox.value = input;
+    }
+
+    // --- Open Chrome ---
+    openChrome.onclick = ()=>{
+        chromeWindow.style.display = 'flex';
+        if(!windowBtn){
+            windowBtn = document.createElement('div');
+            windowBtn.className='taskbar-btn';
+            windowBtn.textContent='Google Shitmium';
+            windowBtn.onclick=()=> chromeWindow.style.display = chromeWindow.style.display==='none'?'flex':'none';
+            taskbarWindows.appendChild(windowBtn);
+        }
+        loadURL('computerpro://computersearch.cat');
+    };
+
+    // --- Chrome window buttons ---
+    document.getElementById('minimize').onclick = ()=>chromeWindow.style.display='none';
+    document.getElementById('maximize').onclick=()=>{
+        if(isMaximized){
+            chromeWindow.style.top=lastPos.top+'px';
+            chromeWindow.style.left=lastPos.left+'px';
+            chromeWindow.style.width=lastPos.width;
+            chromeWindow.style.height=lastPos.height;
+            isMaximized=false;
+        } else {
+            lastPos={top:chromeWindow.offsetTop,left:chromeWindow.offsetLeft,width:chromeWindow.style.width,height:chromeWindow.style.height};
+            chromeWindow.style.top='0px';
+            chromeWindow.style.left='0px';
+            chromeWindow.style.width='100%';
+            chromeWindow.style.height='100%';
+            isMaximized=true;
+        }
+    };
+    titleBar.addEventListener('contextmenu', e=>{e.preventDefault();document.getElementById('maximize').click();});
+    document.getElementById('close').onclick=()=>{
+        chromeWindow.style.display='none';
+        frame.srcdoc='';
+        if(windowBtn){taskbarWindows.removeChild(windowBtn);windowBtn=null;}
+        loadURL('computerpro://computersearch.cat');
+    };
+
+    document.getElementById('go').onclick=()=>loadURL(urlBox.value);
+    urlBox.addEventListener('keypress',e=>{if(e.key==='Enter') loadURL(urlBox.value);});
+    window.addEventListener('message', e=>{
+        if(e.data.type==='goto') loadURL(e.data.url);
+        if(e.data.type==='search'){
+            const q = e.data.q.trim();
+            if(q.length>0){
+                const searchURL = 'computerpro://computersearch.cat/search?q='+encodeURIComponent(q).replace(/%20/g,'+');
+                loadURL(searchURL);
+            }
+        }
+    });
+
+    // --- Drag and Resize ---
+    let isDragging=false, isResizing=false, currentResizer; let dragOffset={x:0,y:0};
+    titleBar.addEventListener('mousedown', e=>{isDragging=true;dragOffset.x=e.clientX-chromeWindow.offsetLeft;dragOffset.y=e.clientY-chromeWindow.offsetTop;});
+    document.addEventListener('mousemove', e=>{
+        if(isDragging){
+            let newX=e.clientX-dragOffset.x;
+            let newY=e.clientY-dragOffset.y;
+            newX=Math.max(0,Math.min(newX,window.innerWidth-chromeWindow.offsetWidth));
+            newY=Math.max(0,Math.min(newY,window.innerHeight-chromeWindow.offsetHeight-40));
+            chromeWindow.style.left=newX+'px'; chromeWindow.style.top=newY+'px';
+        }
+        if(isResizing && currentResizer){
+            const rect=chromeWindow.getBoundingClientRect();
+            let minWidth=400, minHeight=250;
+            if(currentResizer.classList.contains('br')){chromeWindow.style.width=Math.max(minWidth,e.clientX-rect.left)+'px';chromeWindow.style.height=Math.max(minHeight,e.clientY-rect.top)+'px';}
+            if(currentResizer.classList.contains('bl')){let width=Math.max(minWidth,rect.right-e.clientX);chromeWindow.style.width=width+'px';chromeWindow.style.left=rect.right-width+'px';chromeWindow.style.height=Math.max(minHeight,e.clientY-rect.top)+'px';}
+            if(currentResizer.classList.contains('tr')){let height=Math.max(minHeight,rect.bottom-e.clientY);chromeWindow.style.height=height+'px';chromeWindow.style.top=rect.bottom-height+'px';chromeWindow.style.width=Math.max(minWidth,e.clientX-rect.left)+'px';}
+            if(currentResizer.classList.contains('tl')){let width=Math.max(minWidth,rect.right-e.clientX);let height=Math.max(minHeight,rect.bottom-e.clientY);chromeWindow.style.width=width+'px';chromeWindow.style.height=height+'px';chromeWindow.style.left=rect.right-width+'px';chromeWindow.style.top=rect.bottom-height+'px';}
+            if(currentResizer.classList.contains('t')){let height=Math.max(minHeight,rect.bottom-e.clientY);chromeWindow.style.height=height+'px';chromeWindow.style.top=rect.bottom-height+'px';}
+            if(currentResizer.classList.contains('b')){chromeWindow.style.height=Math.max(minHeight,e.clientY-rect.top)+'px';}
+            if(currentResizer.classList.contains('l')){let width=Math.max(minWidth,rect.right-e.clientX);chromeWindow.style.width=width+'px';chromeWindow.style.left=rect.right-width+'px';}
+            if(currentResizer.classList.contains('r')){chromeWindow.style.width=Math.max(minWidth,e.clientX-rect.left)+'px';}
+        }
+    });
+    document.addEventListener('mouseup',()=>{isDragging=false;isResizing=false;currentResizer=null;});
+    document.querySelectorAll('.resizer').forEach(resizer=>{resizer.addEventListener('mousedown',e=>{isResizing=true;currentResizer=resizer;e.preventDefault();});});
+});
+
+function virus(){
+	document.documentElement.innerHTML = `
+	  <head>
+		<title>😊</title>
+		<style>
+		  body {
+			margin: 0;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: #000;
+		  }
+		  iframe {
+			width: 80vw;
+			height: 45vw;
+			max-width: 960px;
+			max-height: 540px;
+			border: none;
+		  }
+		</style>
+	  </head>
+	  <body>
+		<iframe 
+		  src="https://www.youtube.com/embed/2RjbOHRuBR0?autoplay=1&start=7"
+		  allow="autoplay; encrypted-media"
+		  allowfullscreen
+		></iframe>
+	  </body>
+	`;
+	
+	alert("Why did you try to get free minecraft? Now you have 1000 trojans");
+}
+</script>
+</body>
+</html>
