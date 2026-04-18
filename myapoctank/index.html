@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apocalypse Tank</title>
+
+<style>
+    /* ===== RESET ===== */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", system-ui, sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: linear-gradient(135deg, #1e1e2f, #3a3a6a, #1e1e2f);
+        background-size: 400% 400%;
+        animation: gradientMove 12s ease infinite;
+        color: white;
+    }
+
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* ===== MAIN CARD ===== */
+    .container {
+        backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+
+        border-radius: 20px;
+        padding: 40px;
+        width: 90%;
+        max-width: 600px;
+
+        text-align: center;
+
+        box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
+
+    p {
+        opacity: 0.8;
+        margin-bottom: 25px;
+    }
+
+    /* ===== BUTTON ===== */
+    .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 12px;
+
+        background: linear-gradient(135deg, #6a5cff, #8f7bff);
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+
+        transition: 0.25s;
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    /* ===== GIF SECTION ===== */
+    .construction {
+        margin-top: 30px;
+        opacity: 0.9;
+    }
+
+    .construction img {
+        width: 120px;
+        margin-top: 10px;
+        filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+        margin-top: 25px;
+        font-size: 0.8rem;
+        opacity: 0.6;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Apocalypse Tank</h1>
+    <p>Your chaotic desktop companion inspired by classic RTS energy.</p>
+
+    <a href="#" class="btn">Download</a>
+
+    <div class="construction">
+        <p>⚠️ Site under construction</p>
+        <!-- Replace this GIF with your own if you want -->
+        <img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" alt="Under Construction">
+    </div>
+
+    <div class="footer">
+        Made by Computerproofficial
+    </div>
+</div>
+
+</body>
+</html>
