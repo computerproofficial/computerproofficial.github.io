@@ -1,122 +1,205 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apocalypse Tank</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apocalypse Tank</title>
+  <link rel="icon" type="image/x-icon" href="computerpro.ico">
 
-<style>
-    /* ===== RESET ===== */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Segoe UI", system-ui, sans-serif;
-    }
-
+  <style>
     body {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        background: linear-gradient(135deg, #1e1e2f, #3a3a6a, #1e1e2f);
-        background-size: 400% 400%;
-        animation: gradientMove 12s ease infinite;
-        color: white;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a1d21, #2c3136);
+      color: #eee;
+      margin: 0;
     }
 
-    @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    nav {
+      background: linear-gradient(90deg, #0f1113, #1c1f24);
+      padding: 15px 25px;
+      color: #eee;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.6);
     }
 
-    /* ===== MAIN CARD ===== */
-    .container {
-        backdrop-filter: blur(20px);
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-
-        border-radius: 20px;
-        padding: 40px;
-        width: 90%;
-        max-width: 600px;
-
-        text-align: center;
-
-        box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: normal;
+      transition: color 0.2s;
     }
 
-    h1 {
-        font-size: 2.5rem;
-        margin-bottom: 10px;
-        letter-spacing: 1px;
+    nav a:hover {
+      color: #4da3ff;
     }
 
-    p {
-        opacity: 0.8;
-        margin-bottom: 25px;
+    .hero {
+      text-align: center;
+      padding: 40px 20px 10px;
     }
 
-    /* ===== BUTTON ===== */
-    .btn {
-        display: inline-block;
-        padding: 12px 24px;
-        border-radius: 12px;
-
-        background: linear-gradient(135deg, #6a5cff, #8f7bff);
-        color: white;
-        text-decoration: none;
-        font-weight: 600;
-
-        transition: 0.25s;
+    .hero h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #4da3ff, #9f7cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    .hero p {
+      color: #bbb;
     }
 
-    /* ===== GIF SECTION ===== */
-    .construction {
-        margin-top: 30px;
-        opacity: 0.9;
+    .under-construction {
+      margin-top: 20px;
     }
 
-    .construction img {
-        width: 120px;
-        margin-top: 10px;
-        filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+    .under-construction img {
+      width: 200px;
+      opacity: 0.9;
     }
 
-    /* ===== FOOTER ===== */
-    .footer {
-        margin-top: 25px;
-        font-size: 0.8rem;
-        opacity: 0.6;
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+      padding: 30px;
     }
-</style>
+
+    .vm-card {
+      width: 300px;
+      height: 260px;
+      background: linear-gradient(145deg, #1a1a1a, #242424);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #000;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vm-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border: 1px solid #4da3ff;
+      box-shadow: 0 0 20px rgba(77,163,255,0.5);
+    }
+
+    .vm-preview {
+      height: 160px;
+      background: #2a2a2a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vm-preview img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+      transition: transform 0.3s;
+    }
+
+    .vm-card:hover .vm-preview img {
+      transform: scale(1.08);
+    }
+
+    .vm-title {
+      padding: 15px;
+      color: #eee;
+      font-size: 17px;
+      font-weight: bold;
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .download-btn {
+      margin: 30px auto;
+      display: block;
+      padding: 12px 25px;
+      background: linear-gradient(90deg, #4da3ff, #7a5cff);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .download-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(77,163,255,0.7);
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="container">
+  <nav>
+    <span>Apocalypse Tank</span>
+    <a href="#">Home</a>
+    <a onclick="rules()">Rules</a>
+    <a href="#">Wiki</a>
+  </nav>
+
+  <div class="hero">
     <h1>Apocalypse Tank</h1>
-    <p>Your chaotic desktop companion inspired by classic RTS energy.</p>
+    <p>A chaotic desktop companion that clicks, hunts, and judges you.</p>
 
-    <a href="#" class="btn">Download</a>
+    <div class="under-construction">
+      <img src="https://media.tenor.com/2roX3uxz_68AAAAC/under-construction.gif">
+    </div>
+  </div>
 
-    <div class="construction">
-        <p>⚠️ Site under construction</p>
-        <!-- Replace this GIF with your own if you want -->
-        <img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" alt="Under Construction">
+  <button class="download-btn" onclick="download()">Download Tank</button>
+
+  <div class="card-container">
+
+    <div class="vm-card">
+      <div class="vm-preview">
+        <img src="https://4kwallpapers.com/images/walls/thumbs_3t/13944.jpg">
+      </div>
+      <div class="vm-title">Autonomous Clicking AI</div>
     </div>
 
-    <div class="footer">
-        Made by Computerproofficial
+    <div class="vm-card">
+      <div class="vm-preview">
+        <img src="https://4kwallpapers.com/images/walls/thumbs_3t/13944.jpg">
+      </div>
+      <div class="vm-title">Aggro Mode (Cursor Hunter)</div>
     </div>
-</div>
+
+    <div class="vm-card">
+      <div class="vm-preview">
+        <img src="https://4kwallpapers.com/images/walls/thumbs_3t/13944.jpg">
+      </div>
+      <div class="vm-title">Right-Click Personality Menu</div>
+    </div>
+
+  </div>
+
+<script>
+function rules() {
+  alert("Rules: Don’t spam-click the tank. If you do… it WILL notice.");
+}
+
+function download() {
+  alert("Download coming soon... the tank is still evolving.");
+}
+</script>
 
 </body>
 </html>
