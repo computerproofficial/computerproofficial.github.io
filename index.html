@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Computerbro — home of ComputerVM and other projects.">
+  <title>Computerbro</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: #10151d;
+      color: #eef3f8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(ellipse at 50% 0, #1b3550 0, #10151d 55%);
+    }
+
+    main {
+      width: min(960px, 100%);
+      margin: auto;
+      padding: 72px 24px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: #83c5ff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 12px 0;
+      font-size: clamp(3rem, 9vw, 5.5rem);
+      letter-spacing: -0.06em;
+    }
+
+    .intro {
+      max-width: 560px;
+      margin: 0 auto 36px;
+      color: #b7c4d2;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .project-card {
+      display: block;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 28px;
+      border: 1px solid #35506a;
+      border-radius: 18px;
+      background: rgb(20 31 43 / 88%);
+      color: inherit;
+      text-align: left;
+      text-decoration: none;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .project-card:hover,
+    .project-card:focus-visible {
+      transform: translateY(-3px);
+      border-color: #67b7ff;
+      background: #192b3c;
+    }
+
+    .project-card h2 { margin: 0 0 8px; font-size: 1.5rem; }
+    .project-card p { margin: 0; color: #b7c4d2; line-height: 1.6; }
+    .arrow { float: right; color: #83c5ff; font-size: 1.4rem; }
+
+    footer {
+      padding: 20px 24px;
+      color: #9aa9b8;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    footer a { color: #9dcfff; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Projects and experiments</p>
+    <h1>Computerbro</h1>
+    <p class="intro">Welcome to Computerbro. Explore the projects collected here.</p>
+
+    <a class="project-card" href="./computervm/index.html">
+      <span class="arrow" aria-hidden="true">↗</span>
+      <h2>ComputerVM</h2>
+      <p>Visit the ComputerVM project and its virtual machine collection.</p>
+    </a>
+  </main>
+
+  <footer>
+    This master homepage is dedicated to the public domain under
+    <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal</a>.
+  </footer>
+</body>
+</html>
